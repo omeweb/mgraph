@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>mgraph</artifactId>
+		<groupId>com.taobao.mgraph</groupId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+    <artifactId>mgraph-deploy</artifactId>
+    <packaging>pom</packaging>
+	
+    <build>
+		<!--瑕佸拰椤圭洰鍚嶇О淇濇寔涓�嚧锛屽惁鍒檚cm鍙戝竷浼氬け璐?2012-06-04-->
+        <finalName>mgraph</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

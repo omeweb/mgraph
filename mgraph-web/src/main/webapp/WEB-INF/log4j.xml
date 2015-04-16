@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE log4j:configuration SYSTEM "http://toolkit.alibaba-inc.com/dtd/log4j/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	threshold="null" debug="null">
+
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="system" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/system.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- 2014-05-22 by liusan.dyf -->
+	<appender name="queue" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/queue.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="main" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/main.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- 哈勃监控日志 -->
+	<appender name="monitor" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/monitor.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="spring" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/spring.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="ibatis" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/ibatis.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- 2012-09-13 by liusan.dyf 脚本日志 -->
+	<appender name="script" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/script.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+	
+	<!-- 2013-06-13 by liusan.dyf -->
+	<appender name="event" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/event.log" />
+		${loggingAppenderConfig}
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- 2013-02-27 by liusan.dyf 用来记录额外的信息，比如需要同步到云梯上的内容 -->
+	<!--2013-11-28 by mufeng.qcg 设置append为true防止重启或发布丢失数据-->
+	<appender name="extra" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/extra.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="GB2312" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+		
+	<!-- 2013-05-16 by liusan.dyf -->
+	<appender name="temp" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${loggingRoot}/temp.log"/>
+		<param name="append" value="false"/>
+		<param name="encoding" value="GB2312"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n"/>
+		</layout>
+	</appender>
+		
+	<!--
+	logger的配置
+	-->
+
+	<logger name="system" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="system" />
+	</logger>
+
+	<!-- 2014-05-22 为队列添加的日志 by liusan.dyf -->
+	<logger name="queue" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="queue" />
+	</logger>
+
+	<!-- 哈勃监控日志 
+	additivity标志说明：默认情况下子Logger会继承父Logger(root的logger)的appender，也就是说子Logger会在父Logger的appender里输出。若是additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出
+	-->
+	<logger name="monitor" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="monitor" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="spring" />
+	</logger>
+
+	<logger name="spring" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="spring" />
+	</logger>
+
+	<!-- 2013-02-27 by liusan.dyf -->
+	<logger name="extra" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="extra" />
+	</logger>
+	
+	<!-- 2014-01-15 by liusan.dyf -->
+	<logger name="org.apache.solr" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="system" />
+	</logger>
+
+	<logger name="org.apache.solr.core.SolrCore" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="system" />
+	</logger>
+
+	<logger name="org.apache.solr.servlet.SolrDispatchFilter" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="system" />
+	</logger>
+	
+	<!-- 2013-05-16 by liusan.dyf -->
+	<logger name="temp" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="temp" />
+	</logger>
+		
+	<!-- 2012-09-13 by liusan.dyf 脚本日志 -->
+	<logger name="script" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="script" />
+	</logger>
+	
+	<!-- 2013-06-13 by liusan.dyf -->
+	<logger name="event" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="event" />
+	</logger>
+
+	<logger name="com.ibatis">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="ibatis" />
+	</logger>
+
+	<logger name="java.sql" additivity="false">
+		<level value="${loggingLevel}" />
+		<appender-ref ref="ibatis" />
+	</logger>
+
+	<root>
+		<level value="${loggingLevel}" />
+		<appender-ref ref="main" />
+	</root>
+	
+</log4j:configuration>

@@ -1,0 +1,111 @@
+package com.taobao.mgraph.test.actor;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import akka.actor.Terminated;
+import akka.actor.UntypedActor;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
+
+public class Main {
+	private static final Log logger = LogFactory.getLog("system");
+
+	public static void main(String[] args) throws Throwable {
+		logger.info("do it now");
+
+		ActorSystem system = ActorSystem.create("demo");
+
+		/**
+		 * 当创建helloWorld的actor时，会通过preStart创建一个greeter的actor， 然后greeter.tell(Greeter.Msg.GREET, getSelf());
+		 */
+		ActorRef server = system.actorOf(Props.create(Server.class), "server");
+		logger.info(server);
+
+		// logger.info(system.actorSelection("server").anchor().toString());
+
+		system.actorOf(Props.create(Client.class, server), "client");
+	}
+}
+
+enum MessageType {
+	PLUS, MAX, MIN, DONE;
+}
+
+class Message {
+	public int status;
+	public Object content;
+}
+
+/**
+ * 这是两个actor的交互行为，在引入第三个actor，负责监视HelloWorld的actor，当其发出Terminated的消息时，这个负责监视的actor会处理之
+ * 
+ * @author <a href="mailto:liusan.dyf@taobao.com">liusan.dyf</a>
+ * @version 1.0
+ * @since 2015年3月15日
+ */
+class Client extends UntypedActor {
+	private final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
+	private final ActorRef ref;
+
+	/**
+	 * 此时的Terminator actor要观察另一个actor ref
+	 *
+	 * @param ref
+	 */
+	public Client(ActorRef ref) {
+		this.ref = ref;
+		// Registers this actor as a Monitor-监视 for the provided ActorRef.
+		getContext().watch(ref);
+
+		log.info("开始监视:" + ref.getClass());
+	}
+
+	@Override
+	public void onReceive(Object msg) {
+		if (msg instanceof Terminated) {
+			log.info("{} has terminated, shutting down system", ref.path());
+			getContext().system().shutdown();
+		} else {
+			unhandled(msg);
+		}
+	}
+}
+
+class Worker extends UntypedActor {
+	@Override
+	public void onReceive(Object msg) {
+		if (msg == MessageType.PLUS) {
+			this.getSender().tell(MessageType.DONE, getSelf());
+		} else
+			unhandled(msg);
+	}
+}
+
+class Server extends UntypedActor {
+	private static final Log logger = LogFactory.getLog("system");
+
+	@Override
+	public void preStart() {
+		// create the greeter actor
+		final ActorRef worker = getContext().actorOf(Props.create(Worker.class), "worker");
+
+		logger.info(worker.toString());
+
+		// 把Greeter.Msg.GREET这个消息发送给给名字为greeter的actor，发送者是self
+		// getSelf() 是一个sender
+		worker.tell(MessageType.PLUS, getSelf());
+	}
+
+	@Override
+	public void onReceive(Object msg) {
+		if (msg == MessageType.DONE) {
+			// when the greeter is done, stop this actor and with it the application
+			getContext().stop(getSelf());
+		} else
+			unhandled(msg);
+	}
+}

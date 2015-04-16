@@ -1,0 +1,99 @@
+package com.taobao.mgraph.test;
+
+import java.util.Arrays;
+import java.util.List;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
+
+import scala.Tuple2;
+
+public class SparkTest {
+
+	public static void main(String[] args) {
+		// 初始化并构建了一个SparkConf类的对象conf，使用其中的setMaster和setAppName方法将这个驱动程序的Master设为本地模式，将其名称设为testSparkConf
+		// SparkConf类中只是对一个HashMap的封装，初始化时使用System.getProperties读取JVM属性，然后将以"spark."为前缀的属性读取出来，存进这个名为settings的HashMap中
+		// 更多参数见 http://spark.apache.org/docs/latest/configuration.html#spark-properties
+		SparkConf conf = new SparkConf().setMaster("local").setAppName("testSparkConf");
+
+		// env
+		JavaSparkContext spark = new JavaSparkContext(conf);
+
+		// 文件
+		JavaRDD<String> file = spark.textFile("d:/main.log");
+
+		// -----------------行数
+		long count = file.count();
+		System.out.println(count);
+
+		// -----------------看包含了某个关键字有多少行
+		JavaRDD<String> info = file.filter(new Function<String, Boolean>() {
+			private static final long serialVersionUID = 1L;
+
+			public Boolean call(String s) {
+				return s.contains("INFO");
+			}
+		});
+
+		// Count
+		System.out.println(info);
+		System.out.println(info.count());
+
+		// -----------------找单词的出现次数
+		JavaRDD<String> words = file.flatMap(new FlatMapFunction<String, String>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public Iterable<String> call(String s) {
+				// System.out.println(s);
+				return Arrays.asList(s.split(" "));
+			}
+		});
+
+		JavaPairRDD<String, Integer> pairs = words.mapToPair(new PairFunction<String, String, Integer>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public Tuple2<String, Integer> call(String s) {
+				return new Tuple2<String, Integer>(s, 1);
+			}
+		});
+
+		JavaPairRDD<String, Integer> counts = pairs.reduceByKey(new Function2<Integer, Integer, Integer>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public Integer call(Integer a, Integer b) {
+				return a + b;
+			}
+		});
+
+		// Map<String, Integer> countMap = counts.collectAsMap();
+		// for (String item : countMap.keySet()) {
+		// System.out.println(item + " " + countMap.get(item));
+		// }
+
+		List<Tuple2<String, Integer>> output = counts.collect();
+		for (Tuple2<?, ?> tuple : output) {
+			System.out.println(tuple._1() + ": " + tuple._2());
+		}
+
+		// 等待结束
+		tools.Global.sleep(1000 * 100);
+
+		// 关闭环境
+		spark.close();
+		spark.stop();
+	}
+}
