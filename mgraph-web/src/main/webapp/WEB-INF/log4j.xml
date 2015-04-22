@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB2312"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "http://toolkit.alibaba-inc.com/dtd/log4j/log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
@@ -14,7 +14,7 @@
 		<param name="file" value="${loggingRoot}/system.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
@@ -25,7 +25,7 @@
 		<param name="file" value="${loggingRoot}/queue.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
@@ -35,18 +35,18 @@
 		<param name="file" value="${loggingRoot}/main.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
 	</appender>
 
-	<!-- ¹þ²ª¼à¿ØÈÕÖ¾ -->
+	<!-- å“ˆå‹ƒç›‘æŽ§æ—¥å¿— -->
 	<appender name="monitor" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${loggingRoot}/monitor.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
@@ -56,7 +56,7 @@
 		<param name="file" value="${loggingRoot}/spring.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
@@ -66,18 +66,18 @@
 		<param name="file" value="${loggingRoot}/ibatis.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
 	</appender>
 
-	<!-- 2012-09-13 by liusan.dyf ½Å±¾ÈÕÖ¾ -->
+	<!-- 2012-09-13 by liusan.dyf è„šæœ¬æ—¥å¿— -->
 	<appender name="script" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${loggingRoot}/script.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
@@ -88,18 +88,18 @@
 		<param name="file" value="${loggingRoot}/event.log" />
 		${loggingAppenderConfig}
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p %C{1} - %m%n"/>
 		</layout>
 	</appender>
 
-	<!-- 2013-02-27 by liusan.dyf ÓÃÀ´¼ÇÂ¼¶îÍâµÄÐÅÏ¢£¬±ÈÈçÐèÒªÍ¬²½µ½ÔÆÌÝÉÏµÄÄÚÈÝ -->
-	<!--2013-11-28 by mufeng.qcg ÉèÖÃappendÎªtrue·ÀÖ¹ÖØÆô»ò·¢²¼¶ªÊ§Êý¾Ý-->
+	<!-- 2013-02-27 by liusan.dyf ç”¨æ¥è®°å½•é¢å¤–çš„ä¿¡æ¯ï¼Œæ¯”å¦‚éœ€è¦åŒæ­¥åˆ°äº‘æ¢¯ä¸Šçš„å†…å®¹ -->
+	<!--2013-11-28 by mufeng.qcg è®¾ç½®appendä¸ºtrueé˜²æ­¢é‡å¯æˆ–å‘å¸ƒä¸¢å¤±æ•°æ®-->
 	<appender name="extra" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${loggingRoot}/extra.log" />
 		<param name="append" value="true" />
-		<param name="encoding" value="GB2312" />
+		<param name="encoding" value="UTF-8" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%m%n" />
 		</layout>
@@ -109,14 +109,14 @@
 	<appender name="temp" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${loggingRoot}/temp.log"/>
 		<param name="append" value="false"/>
-		<param name="encoding" value="GB2312"/>
+		<param name="encoding" value="UTF-8"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%m%n"/>
 		</layout>
 	</appender>
 		
 	<!--
-	loggerµÄÅäÖÃ
+	loggerçš„é…ç½®
 	-->
 
 	<logger name="system" additivity="false">
@@ -124,14 +124,14 @@
 		<appender-ref ref="system" />
 	</logger>
 
-	<!-- 2014-05-22 Îª¶ÓÁÐÌí¼ÓµÄÈÕÖ¾ by liusan.dyf -->
+	<!-- 2014-05-22 ä¸ºé˜Ÿåˆ—æ·»åŠ çš„æ—¥å¿— by liusan.dyf -->
 	<logger name="queue" additivity="false">
 		<level value="${loggingLevel}" />
 		<appender-ref ref="queue" />
 	</logger>
 
-	<!-- ¹þ²ª¼à¿ØÈÕÖ¾ 
-	additivity±êÖ¾ËµÃ÷£ºÄ¬ÈÏÇé¿öÏÂ×ÓLogger»á¼Ì³Ð¸¸Logger(rootµÄlogger)µÄappender£¬Ò²¾ÍÊÇËµ×ÓLogger»áÔÚ¸¸LoggerµÄappenderÀïÊä³ö¡£ÈôÊÇadditivityÉèÎªfalse£¬Ôò×ÓLoggerÖ»»áÔÚ×Ô¼ºµÄappenderÀïÊä³ö£¬¶ø²»»áÔÚ¸¸LoggerµÄappenderÀïÊä³ö
+	<!-- å“ˆå‹ƒç›‘æŽ§æ—¥å¿— 
+	additivityæ ‡å¿—è¯´æ˜Žï¼šé»˜è®¤æƒ…å†µä¸‹å­Loggerä¼šç»§æ‰¿çˆ¶Logger(rootçš„logger)çš„appenderï¼Œä¹Ÿå°±æ˜¯è¯´å­Loggerä¼šåœ¨çˆ¶Loggerçš„appenderé‡Œè¾“å‡ºã€‚è‹¥æ˜¯additivityè®¾ä¸ºfalseï¼Œåˆ™å­Loggeråªä¼šåœ¨è‡ªå·±çš„appenderé‡Œè¾“å‡ºï¼Œè€Œä¸ä¼šåœ¨çˆ¶Loggerçš„appenderé‡Œè¾“å‡º
 	-->
 	<logger name="monitor" additivity="false">
 		<level value="${loggingLevel}" />
@@ -176,7 +176,7 @@
 		<appender-ref ref="temp" />
 	</logger>
 		
-	<!-- 2012-09-13 by liusan.dyf ½Å±¾ÈÕÖ¾ -->
+	<!-- 2012-09-13 by liusan.dyf è„šæœ¬æ—¥å¿— -->
 	<logger name="script" additivity="false">
 		<level value="${loggingLevel}" />
 		<appender-ref ref="script" />

@@ -103,6 +103,13 @@
 			<version>${scala-version}</version>
 		</dependency>
 		
+		<!-- 编码检测 2015-4-22 10:22:07 by 六三 -->
+		<dependency>
+		  <groupId>com.googlecode.juniversalchardet</groupId>
+		  <artifactId>juniversalchardet</artifactId>
+		  <version>1.0.3</version>
+		</dependency>
+		
 		<!-- dependency -->
 		<dependency>
 		  <groupId>org.scribe</groupId>
@@ -138,8 +145,8 @@
 		
 		<!--tools-->
 		<dependency>
-		  <groupId>com.taobao.tbctu</groupId>
-		  <artifactId>tbctu-tools</artifactId>
+		  <groupId>com.underline.common</groupId>
+		  <artifactId>tools</artifactId>
 		  <version>1.8-SNAPSHOT</version>
 		  <exclusions>
 				<exclusion>

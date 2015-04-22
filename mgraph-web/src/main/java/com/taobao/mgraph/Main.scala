@@ -10,7 +10,7 @@ object Main {
     private def pri() {} //私有方法，中间的等号可以省略 private def pri() = {}
 
     def convertSqlMap() {
-        val file = raw"D:\codes\bak\mtee\freeproj-biz\src\test\resources\map\catalog.xml"
+        val file = raw"D:\codes/utee/utee/utee-web\src\main/resources\mybatis-sqlmap/data_dictionary.xml"
         val content = Util.readFileToString(file, "gbk")
 
         val sb = new StringBuilder
@@ -31,7 +31,20 @@ object Main {
 
         //println(flag)
         //println("==========================");
-        println(sb.toString())
+        var s = sb.toString
+        s = tools.StringUtil.replace(s, "Class", "Type")
+        s = tools.StringUtil.replace(s, "sqlMap", "mapper")
+        s = tools.StringUtil.replace(s, "isNotEmpty", "if")
+        s = tools.StringUtil.replace(s, "property", "test")
+        s = tools.StringUtil.replace(s, "<dynamic>", "")
+        s = tools.StringUtil.replace(s, "</dynamic>", "")
+        s = tools.StringUtil.replace(s, "type=\"post\"", "order=\"AFTER\"")
+        println(s)
+    }
+
+    def postSSO() = {
+        val res = tools.http.HttpRequestBuilder.create("https://login.alibaba-inc.com/rpc/sso/communicate.json").data("SSO_TOKEN", "542477EBDCD29B97BD8468E14483B10E").data("RETURN_USER", "true").post
+        println(res.toString())
     }
 
     def main(args: Array[String]): Unit = {
@@ -41,9 +54,11 @@ object Main {
 
         //FileUtils.write(new File("d:/data/t.html"), newString,"utf-8")
 
-        Util.changeCharset(raw"D:\codes\git\mod-user\t", "gbk", "UTF-8", "java")
+        Util.changeCharset(raw"D:/codes/git/mgraph","UTF-8", "java\ntxt\nxml")
         //js,css,xml,java,txt,properties
         //convertSqlMap();
+        //postSSO
+        //detect("d:/data/bootScript.txt")
         return ;
 
         val user = new UserEntry
