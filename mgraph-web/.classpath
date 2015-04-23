@@ -4,6 +4,7 @@
 	<classpathentry excluding="**/*.java" including="**/**" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry including="**/*.scala|**/*.java|**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.jar" sourcepath="M2_REPO/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6-sources.jar">
 		<attributes>
@@ -30,6 +31,11 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/repo/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/ch/hsr/geohash/1.0.13/geohash-1.0.13.jar" sourcepath="M2_REPO/ch/hsr/geohash/1.0.13/geohash-1.0.13-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/D:/repo/ch/hsr/geohash/1.0.13/geohash-1.0.13-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar" sourcepath="M2_REPO/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/D:/repo/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3-javadoc.jar!/"/>
@@ -47,7 +53,6 @@
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/com/taobao/freeproj/freeproj/3.0-SNAPSHOT/freeproj-3.0-SNAPSHOT.jar" sourcepath="M2_REPO/com/taobao/freeproj/freeproj/3.0-SNAPSHOT/freeproj-3.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/ibatis/ibatis/2.3.4.726/ibatis-2.3.4.726.jar"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/underline/common/tools/1.8-SNAPSHOT/tools-1.8-SNAPSHOT.jar" sourcepath="M2_REPO/com/underline/common/tools/1.8-SNAPSHOT/tools-1.8-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.5.0/jackson-core-2.5.0.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.5.0/jackson-core-2.5.0-sources.jar">

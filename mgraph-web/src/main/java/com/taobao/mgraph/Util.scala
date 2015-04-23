@@ -64,8 +64,10 @@ object Util {
                 //重新保存内容
                 var newString = new String(s.getBytes(), to); //2015-4-8 15:18:31 by 六三
                 //val newString = new String(s.getBytes(from), to);
-                newString = tools.StringUtil.replace(newString, "UTF-8", "UTF-8")
-                newString = tools.StringUtil.replace(newString, "UTF-8", "UTF-8")
+                newString = tools.StringUtil.replace(newString, "\"GB2312\"", "\"UTF-8\"")
+                newString = tools.StringUtil.replace(newString, "\"GBK\"", "\"UTF-8\"")
+                newString = tools.StringUtil.replace(newString, "\"GB18030\"", "\"UTF-8\"")
+                newString = tools.StringUtil.replace(newString, "\"gb2312\"", "\"UTF-8\"")
                 println("正在替换：" + item)
                 FileUtils.write(item, newString, to)
             }

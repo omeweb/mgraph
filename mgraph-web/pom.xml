@@ -103,6 +103,13 @@
 			<version>${scala-version}</version>
 		</dependency>
 		
+		<!--geohash 2015-4-23 11:51:13 by liusan.dyf-->
+		<dependency>
+		  <groupId>ch.hsr</groupId>
+		  <artifactId>geohash</artifactId>
+		  <version>1.0.13</version>
+		</dependency>
+		
 		<!-- 编码检测 2015-4-22 10:22:07 by 六三 -->
 		<dependency>
 		  <groupId>com.googlecode.juniversalchardet</groupId>

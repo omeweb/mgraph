@@ -1,51 +1,12 @@
 package com.taobao.mgraph
 
 import java.io._
+import java.util._
 import scala.io.Source
 import org.apache.commons.io.FileUtils
 
 object Main {
     val DEFAULT_ENCODING: String = "utf-8";
-
-    private def pri() {} //私有方法，中间的等号可以省略 private def pri() = {}
-
-    def convertSqlMap() {
-        val file = raw"D:\codes/utee/utee/utee-web\src\main/resources\mybatis-sqlmap/data_dictionary.xml"
-        val content = Util.readFileToString(file, "gbk")
-
-        val sb = new StringBuilder
-
-        var flag = 0;
-        for (item <- content.toCharArray()) {
-            var c = item
-            if (c == '#' || c == '$') {
-                flag = flag + 1;
-
-                if ((flag % 2) == 1) {
-                    sb.append(c).append("{")
-                } else
-                    sb.append("}")
-            } else
-                sb.append(c)
-        }
-
-        //println(flag)
-        //println("==========================");
-        var s = sb.toString
-        s = tools.StringUtil.replace(s, "Class", "Type")
-        s = tools.StringUtil.replace(s, "sqlMap", "mapper")
-        s = tools.StringUtil.replace(s, "isNotEmpty", "if")
-        s = tools.StringUtil.replace(s, "property", "test")
-        s = tools.StringUtil.replace(s, "<dynamic>", "")
-        s = tools.StringUtil.replace(s, "</dynamic>", "")
-        s = tools.StringUtil.replace(s, "type=\"post\"", "order=\"AFTER\"")
-        println(s)
-    }
-
-    def postSSO() = {
-        val res = tools.http.HttpRequestBuilder.create("https://login.alibaba-inc.com/rpc/sso/communicate.json").data("SSO_TOKEN", "542477EBDCD29B97BD8468E14483B10E").data("RETURN_USER", "true").post
-        println(res.toString())
-    }
 
     def main(args: Array[String]): Unit = {
         //val sc = Util.readFileToString(raw"D:\data\pageSource\bootstrap\activityKV.html", "gbk")
@@ -54,11 +15,13 @@ object Main {
 
         //FileUtils.write(new File("d:/data/t.html"), newString,"utf-8")
 
-        Util.changeCharset(raw"D:/codes/git/mgraph","UTF-8", "java\ntxt\nxml")
+        //Util.changeCharset(raw"D:\codes/utee/utee", "UTF-8", "java\ntxt\nxml")
         //js,css,xml,java,txt,properties
         //convertSqlMap();
         //postSSO
         //detect("d:/data/bootScript.txt")
+
+        sendSms
         return ;
 
         val user = new UserEntry
@@ -100,6 +63,60 @@ object Main {
         //println(Util.getExtensionV2(null))
         println("-----" + Util.uslCase2CamelCase("a_b_c_info_type"))
         println(getAStringMaybe(-1))
+    }
+
+    private def pri() {} //私有方法，中间的等号可以省略 private def pri() = {}
+
+    def sendSms() {
+        val apiKey = "e0514c5f2b7617e45ca79f18d97ff96b"
+        val url = "http://yunpian.com/v1/sms/send.json"
+
+        val params = new HashMap[String, String]();
+        params.put("apikey", apiKey);
+        params.put("mobile", "15888827466");
+        params.put("text", "【绿行公司】您的验证码是5263");
+
+        val ret = tools.http.HttpRequestBuilder.create(url).data(params).post().toString
+        println(ret)
+        //{"code":0,"msg":"OK","result":{"count":1,"fee":1,"sid":1687214507}}
+    }
+
+    def convertSqlMap() {
+        val file = raw"D:\codes/utee/utee/utee-web\src\main/resources\mybatis-sqlmap/data_dictionary.xml"
+        val content = Util.readFileToString(file, "gbk")
+
+        val sb = new StringBuilder
+
+        var flag = 0;
+        for (item <- content.toCharArray()) {
+            var c = item
+            if (c == '#' || c == '$') {
+                flag = flag + 1;
+
+                if ((flag % 2) == 1) {
+                    sb.append(c).append("{")
+                } else
+                    sb.append("}")
+            } else
+                sb.append(c)
+        }
+
+        //println(flag)
+        //println("==========================");
+        var s = sb.toString
+        s = tools.StringUtil.replace(s, "Class", "Type")
+        s = tools.StringUtil.replace(s, "sqlMap", "mapper")
+        s = tools.StringUtil.replace(s, "isNotEmpty", "if")
+        s = tools.StringUtil.replace(s, "property", "test")
+        s = tools.StringUtil.replace(s, "<dynamic>", "")
+        s = tools.StringUtil.replace(s, "</dynamic>", "")
+        s = tools.StringUtil.replace(s, "type=\"post\"", "order=\"AFTER\"")
+        println(s)
+    }
+
+    def postSSO() = {
+        val res = tools.http.HttpRequestBuilder.create("https://login.alibaba-inc.com/rpc/sso/communicate.json").data("SSO_TOKEN", "542477EBDCD29B97BD8468E14483B10E").data("RETURN_USER", "true").post
+        println(res.toString())
     }
 
     def m(v: String): Unit = {
