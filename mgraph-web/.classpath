@@ -36,6 +36,11 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/repo/ch/hsr/geohash/1.0.13/geohash-1.0.13-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/3.1/cglib-nodep-3.1.jar" sourcepath="M2_REPO/cglib/cglib-nodep/3.1/cglib-nodep-3.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/D:/repo/cglib/cglib-nodep/3.1/cglib-nodep-3.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar" sourcepath="M2_REPO/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/D:/repo/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3-javadoc.jar!/"/>

@@ -115,7 +115,7 @@ object Main {
     }
 
     def postSSO() = {
-        val res = tools.http.HttpRequestBuilder.create("https://login.alibaba-inc.com/rpc/sso/communicate.json").data("SSO_TOKEN", "542477EBDCD29B97BD8468E14483B10E").data("RETURN_USER", "true").post
+        val res = tools.http.HttpRequestBuilder.create("***").data("SSO_TOKEN", "542477EBDCD29B97BD8468E14483B10E").data("RETURN_USER", "true").post
         println(res.toString())
     }
 

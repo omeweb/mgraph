@@ -110,6 +110,13 @@
 		  <version>1.0.13</version>
 		</dependency>
 		
+		<!-- BeanCopier -->
+		<dependency>
+		  <groupId>cglib</groupId>
+		  <artifactId>cglib-nodep</artifactId>
+		  <version>3.1</version>
+		</dependency>
+		
 		<!-- 编码检测 2015-4-22 10:22:07 by 六三 -->
 		<dependency>
 		  <groupId>com.googlecode.juniversalchardet</groupId>
