@@ -6,6 +6,16 @@ import org.apache.commons.io.FileUtils
 import org.mozilla.universalchardet._
 
 object Util {
+	// from http://svn.codespot.com/a/eclipselabs.org/dawb/trunk/org.dawb.common.util/src/org/dawb/common/util/io/FileUtils.java
+    def getBOM(): String = {
+        var b = new Array[Byte](3)
+        b(0) = 0xEF.toByte
+        b(1) = 0xBB.toByte
+        b(2) = 0xBF.toByte
+
+        new String(b, 0, b.length, "UTF-8");
+    }
+
     def detectEncoding(fileName: String): String = {
         val buf = new Array[Byte](4096);
         val fis = new java.io.FileInputStream(fileName);
@@ -48,6 +58,7 @@ object Util {
         if (dir == null) return ;
 
         val f = new File(dir)
+        var bom = this.getBOM()
 
         for (item <- f.listFiles()) { //循环目录
             val path = item.getPath
@@ -63,13 +74,26 @@ object Util {
 
                 //重新保存内容
                 var newString = new String(s.getBytes(), to); //2015-4-8 15:18:31 by 六三
-                //val newString = new String(s.getBytes(from), to);
-                newString = tools.StringUtil.replace(newString, "\"GB2312\"", "\"UTF-8\"")
-                newString = tools.StringUtil.replace(newString, "\"GBK\"", "\"UTF-8\"")
-                newString = tools.StringUtil.replace(newString, "\"GB18030\"", "\"UTF-8\"")
-                newString = tools.StringUtil.replace(newString, "\"gb2312\"", "\"UTF-8\"")
-                println("正在替换：" + item)
-                FileUtils.write(item, newString, to)
+
+                if (newString != null && newString.length() > 0) {
+
+                    //val newString = new String(s.getBytes(from), to);
+                    newString = tools.StringUtil.replace(newString, "\"GB2312\"", "\"UTF-8\"")
+                    newString = tools.StringUtil.replace(newString, "\"GBK\"", "\"UTF-8\"")
+                    newString = tools.StringUtil.replace(newString, "GB18030", "UTF-8")
+                    newString = tools.StringUtil.replace(newString, "\"gb2312\"", "\"UTF-8\"")
+                    //newString = tools.StringUtil.replace(newString, "mgateway", "underline")
+                    //println("正在替换：" + item)
+
+                    //去除bom
+                    var firstChar = newString.charAt(0);
+                    if (firstChar == bom.charAt(0)) {
+                        println("去重bom：" + item);
+                        newString = newString.substring(1);
+                    }
+
+                    FileUtils.write(item, newString, to)
+                }
             }
         }
     }

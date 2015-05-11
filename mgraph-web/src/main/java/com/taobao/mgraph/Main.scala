@@ -15,13 +15,13 @@ object Main {
 
         //FileUtils.write(new File("d:/data/t.html"), newString,"utf-8")
 
-        //Util.changeCharset(raw"D:\codes/utee/utee", "UTF-8", "java\ntxt\nxml")
+        Util.changeCharset(raw"D:\codes\git\mgateway", "UTF-8", "java\ntxt\nxml\nproperties\njs")
         //js,css,xml,java,txt,properties
         //convertSqlMap();
         //postSSO
         //detect("d:/data/bootScript.txt")
 
-        sendSms
+        //sendSms
         return ;
 
         val user = new UserEntry
